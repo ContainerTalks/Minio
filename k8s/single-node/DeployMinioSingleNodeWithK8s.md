@@ -1,4 +1,4 @@
-# Deploy Minio as single node with k8s
+# Deploy MinIO as Single Node with k8s
 
 - Create namespace  `kubectl apply -f Namespace.yaml`
 - Create persistent volume and persistent volume claim `kubectl apply -f PersistentVolume.yaml -f PersistentVolumeClaim.yaml`
