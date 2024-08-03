@@ -74,3 +74,20 @@ deployment.apps/minio   1/1     1            1           113s
 NAME                               DESIRED   CURRENT   READY   AGE
 replicaset.apps/minio-7bcd7445c5   1         1         1       113s
 ```
+
+### Update the secrets, and Trigger a Rolling Update for the Deployment
+
+```bash
+balu@raspberrypi:~/Minio/k8s/single-node $ echo -n 'miniouser'  | base64
+bWluaW91c2Vy
+
+balu@raspberrypi:~/Minio/k8s/single-node $ echo -n 'miniouserpass'  | base64
+bWluaW91c2VycGFzcw==
+
+balu@raspberrypi:~/Minio/k8s/single-node $ kubectl apply -f Secrets.yml
+secret/minio-secrets configured
+
+balu@raspberrypi:~/Minio/k8s/single-node $ kubectl rollout restart deployment minio -n minio
+
+deployment.apps/minio restarted
+```
