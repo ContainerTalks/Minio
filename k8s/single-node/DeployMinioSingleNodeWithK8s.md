@@ -42,7 +42,7 @@ selector:
 `kubectl apply -f Deployment.yml -f Service.yml`
 
 
-#### Activity History 
+#### Activity History for the above instructions
 
 ```bash
 balu@raspberrypi:~/Minio/k8s/single-node $ kubectl apply -f Namespace.yaml
@@ -87,7 +87,9 @@ bWluaW91c2VycGFzcw==
 balu@raspberrypi:~/Minio/k8s/single-node $ kubectl apply -f Secrets.yml
 secret/minio-secrets configured
 
-balu@raspberrypi:~/Minio/k8s/single-node $ kubectl rollout restart deployment minio -n minio
+balu@raspberrypi:~/Minio/k8s/single-node $ kubectl delete -f Deployment.yml 
+deployment.apps "minio" deleted
 
-deployment.apps/minio restarted
+balu@raspberrypi:~/Minio/k8s/single-node $ kubectl apply -f Deployment.yml 
+deployment.apps/minio created
 ```
