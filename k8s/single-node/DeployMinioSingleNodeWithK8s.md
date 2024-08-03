@@ -1,6 +1,7 @@
 # Deploy MinIO as Single Node with k8s
-Clone the repo or create the files as required from the repo path 
-``
+
+Clone the repo or create the files as required from the repo path `Minio/k8s/single-node`
+
 ### Namespace
 - Create namespace  `kubectl apply -f Namespace.yml`
 
@@ -39,3 +40,37 @@ selector:
 ```
 
 `kubectl apply -f Deployment.yml -f Service.yml`
+
+
+#### Activity History 
+
+```bash
+balu@raspberrypi:~/Minio/k8s/single-node $ kubectl apply -f Namespace.yaml
+namespace/minio created
+
+balu@raspberrypi:~/Minio/k8s/single-node $ kubectl apply -f PersistentVolume.yml -f PersistentVolumeClaim.yml
+persistentvolume/minio-pv created
+persistentvolumeclaim/minio-pvc created
+
+balu@raspberrypi:~/Minio/k8s/single-node $ kubectl apply -f Secrets.yml
+secret/minio-secrets created
+
+balu@raspberrypi:~/Minio/k8s/single-node $ kubectl apply -f Deployment.yml -f Service.ymlly -f Deployment.yml -f Service.yml
+deployment.apps/minio created
+service/minio created
+
+
+balu@raspberrypi:~/Minio/k8s/single-node $ kubectl get all -n minio
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/minio-7bcd7445c5-jmt5g   1/1     Running   0          113s
+
+NAME            TYPE       CLUSTER-IP    EXTERNAL-IP   PORT(S)                         AGE
+service/minio   NodePort   10.43.3.152   <none>        9000:30000/TCP,9001:30001/TCP   113s
+
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/minio   1/1     1            1           113s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/minio-7bcd7445c5   1         1         1       113s
+```
